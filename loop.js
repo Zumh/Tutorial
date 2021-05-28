@@ -4,6 +4,7 @@ console.log(value);
 console.log("h");
 
 
+console.log("Hello world")
 var Index = 0;
 var AnArray = [0, 1, 2, 3];
 
