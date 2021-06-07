@@ -1,0 +1,63 @@
+function mergeSort(array) {
+  // Only change code below this line
+  // here we have to use merge sort to divide and conquer
+  var result = [];
+
+ 
+//The right or second element for the merge sort and it skip by *2
+  for(var rightIndex = 1; rightIndex < array.length; rightIndex *= 2){
+    //The left or start element for the merge sort and it skip by 2 by delay from the right 
+    for(var leftIndex = 0; leftIndex < array.length - rightIndex; leftIndex += 2 * rightIndex){
+        
+          // merge the array here 
+       merge(array.slice(leftIndex, leftIndex + rightIndex), array.slice(leftIndex + rightIndex), result, leftIndex, rightIndex);
+  
+      }
+    
+     // clean up the memory here
+       for(var answerIndex = 0; answerIndex < array.length; answerIndex++){
+        array[answerIndex]  = result[answerIndex];
+     }
+
+  }
+console.log(array)
+  return array;
+  // Only change code above this line
+}
+
+function merge(first, second, result, resultStart, max){
+  // declare variables for index starting point 
+  var leftIndex = 0, rightIndex = 0, resultIndex = resultStart;
+ 
+  // // here we going to put the smaller number on the left and larger number on the right
+  // we need to know when only one element is 
+   while ((leftIndex < max && rightIndex < max) && (first[leftIndex] != null && second[rightIndex] != null) ){
+     
+       if (first[leftIndex] < second[rightIndex]){
+       result[resultIndex++] =  first[leftIndex++];
+     } else {
+       result[resultIndex++] =  second[rightIndex++];
+     }
+   }
+  
+  /*-------- collect the left over from the first/left/start and second/right/end -------*/
+  // // pick up the left over from array to result
+   while((leftIndex <= max) && (first[leftIndex] != null)){
+      result[resultIndex] =  first[leftIndex];
+      resultIndex++;
+      leftIndex++
+  }
+ 
+
+  // // pick up the left over from array to result
+  // include the last piece from the right all the time
+   while((rightIndex <= max) &&  (second[rightIndex] != null)){
+      result[resultIndex] =  second[rightIndex];
+      resultIndex++;
+      rightIndex++;
+   }
+
+  
+}
+mergeSort([4,3,1,67,55,8,0,4,-5,37,7,4,2,9,1,-1]);
+mergeSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
